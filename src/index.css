@@ -36,6 +36,14 @@ ol, ul {
   outline: none;
 }
 
+.value-X {
+  background-color: aquamarine;
+}
+
+.value-O {
+  background-color: pink;
+}
+
 .kbd-navigation .square:focus {
   background: #ddd;
 }

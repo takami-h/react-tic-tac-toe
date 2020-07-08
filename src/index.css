@@ -60,3 +60,36 @@ ol, ul {
 .game-title {
   text-transform: uppercase;
 }
+
+hr {
+  margin-top: 3em;
+}
+.field {
+  display: block;
+  margin: 1em 0;
+}
+.strong {
+  border-color: #ddd;
+  border-style: double;
+  padding: .5em;
+  margin-bottom: .5em;
+}
+
+.filterable-product-table {
+  padding: .1em;
+}
+.search-bar {
+  padding: .5em;
+}
+.product-table {
+  padding: .1em;
+}
+.product-category-row {
+  padding: .1em;
+}
+.product-row {
+  padding: .1em;
+}
+.not-stocked {
+  color: red;
+}

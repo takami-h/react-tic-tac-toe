@@ -11,11 +11,12 @@ export function Board(props) {
     <div>
       {[0, 1, 2].map(row => {
         return (
-          <div className="board-row">
+          <div key={row} className="board-row">
             {[0, 1, 2].map(col => {
               const index = row*3 + col;
               return (
                 <Square
+                  key={index}
                   value={props.squares[index]}
                   onClick={() => props.onClick(index)} />
               );

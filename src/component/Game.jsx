@@ -1,6 +1,12 @@
 import React from 'react';
 
+import { StrongBlock } from './StrongBlock';
+import { Clock } from './Clock';
 import { ShoppingList } from './ShoppingList';
+import { EssayForm } from './EssayForm';
+
+import { FilterableProductTable } from './FilterableProductTable';
+
 import { Board } from './Board';
 
 import { calculateWinner } from '../TicTacToeEngine';
@@ -17,7 +23,7 @@ export class Game extends React.Component {
     };
   }
 
-  handleClick(i) {
+  handleClick = (i) => {
     // stepNumber以降の手を切り捨てることで、時間を巻き戻す
     const history = this.state.history.slice(0, this.state.stepNumber + 1);
     const current = history[history.length - 1];
@@ -68,14 +74,29 @@ export class Game extends React.Component {
           <div className="game-board">
             <Board
               squares={current.squares}
-              onClick={(i) => this.handleClick(i)} />
+              onClick={this.handleClick} />
           </div>
           <div className="game-info">
             <div>{status}</div>
             <ol>{moves}</ol>
           </div>
         </div>
+        <hr />
+        <StrongBlock>
+          <Clock interval={1000} />
+        </StrongBlock>
+        <StrongBlock>
+          <Clock interval={2000} />
+        </StrongBlock>
+        <StrongBlock>
+          <Clock interval={3000} />
+        </StrongBlock>
+        <hr />
         <ShoppingList name="John Doe" items={itemsToBuy} />
+        <hr />
+        <EssayForm />
+        <hr />
+        <FilterableProductTable />
       </main>
     );
   }

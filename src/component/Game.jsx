@@ -1,12 +1,5 @@
 import React from 'react';
 
-import { StrongBlock } from './StrongBlock';
-import { Clock } from './Clock';
-import { ShoppingList } from './ShoppingList';
-import { EssayForm } from './EssayForm';
-
-import { FilterableProductTable } from './FilterableProductTable';
-
 import { Board } from './Board';
 
 import { calculateWinner } from '../TicTacToeEngine';
@@ -50,8 +43,6 @@ export class Game extends React.Component {
   }
 
   render() {
-    const itemsToBuy = ['Instagram', 'WhatsApp', 'Oculus', 'Parse'];
-
     const history = this.state.history;
     const current = history[this.state.stepNumber];
     const winner = calculateWinner(current.squares);
@@ -81,22 +72,6 @@ export class Game extends React.Component {
             <ol>{moves}</ol>
           </div>
         </div>
-        <hr />
-        <StrongBlock>
-          <Clock interval={1000} />
-        </StrongBlock>
-        <StrongBlock>
-          <Clock interval={2000} />
-        </StrongBlock>
-        <StrongBlock>
-          <Clock interval={3000} />
-        </StrongBlock>
-        <hr />
-        <ShoppingList name="John Doe" items={itemsToBuy} />
-        <hr />
-        <EssayForm />
-        <hr />
-        <FilterableProductTable />
       </main>
     );
   }

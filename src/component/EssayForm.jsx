@@ -14,16 +14,19 @@ export class EssayForm extends React.Component {
   };
   render() {
     return (
-      <form>
-        <label className="field">
-          Title:
+      <div>
+        <h1>Essay form - React Main Concepts / form</h1>
+        <form>
+          <label className="field">
+            Title:
           <input type="text" name="title" value={this.state.title} onChange={this.handleChange} />
-        </label>
-        <label className="field">
-          Body:
+          </label>
+          <label className="field">
+            Body:
           <textarea name="body" value={this.state.body} onChange={this.handleChange} />
-        </label>
-      </form>
+          </label>
+        </form>
+      </div>
     );
   }
 }

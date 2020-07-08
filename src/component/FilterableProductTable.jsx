@@ -105,6 +105,7 @@ export class FilterableProductTable extends React.Component {
     });
     return (
       <div className="filterable-product-table">
+        <h1>Product table - React Main Concepts / thinking in react</h1>
         <SearchBar filterText={this.state.filterText} inStockOnly={this.state.inStockOnly}
           onFilterTextChange={this.handleFilterTextChange}
           onInStockOnlyChange={this.handleInStockOnlyChange} />

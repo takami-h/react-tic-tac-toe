@@ -14,7 +14,7 @@ export function Clock(props) {
     return () => {
       clearInterval(timerID);
     };
-  });
+  }, []); // setInterval only once.
 
   return (
   <div>

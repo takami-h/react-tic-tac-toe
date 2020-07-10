@@ -4,17 +4,27 @@ function FormattedDate(props) {
   return (<span>{props.date.toLocaleTimeString()}</span>);
 }
 
-export function Clock(props) {
+/*
+ * custom hook.
+ */
+function usePeriodicDate(interval) {
+  // state for function component.
   const [date, setDate] = useState(new Date());
 
+  // event listener for function component.
   useEffect(() => {
-    const intervalMillis = props.interval || 1000;
+    const intervalMillis = interval || 1000;
     const timerID = setInterval(() => setDate(new Date()), intervalMillis);
 
     return () => {
       clearInterval(timerID);
     };
-  }, []); // setInterval only once.
+  }, [interval]); // setInterval only once.
+  return date;
+}
+
+export function Clock(props) {
+  const date = usePeriodicDate(props.interval);
 
   return (
   <div>

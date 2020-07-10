@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useReducer } from 'react';
 
 const PRODUCTS = [
   {category: "Sporting Goods", price: "$49.99", stocked: true, name: "Football"},
@@ -79,38 +79,38 @@ function ProductTable(props) {
   );
 }
 
-export class FilterableProductTable extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {filterText: '', inStockOnly: false};
+// Reducer
+function reducer(state, action) {
+  switch (action.type) {
+    case 'changeFilterText':
+      return {...state, filterText: action.value};
+    case 'changeInStockOnly':
+      return {...state, inStockOnly: action.value};
+    default:
+      return state;
+  }
+}
+// Actions
+const changeFilterTextAction = (text) => ({type: 'changeFilterText', value: text});
+const changeInStockOnly = (inStockOnly) => ({type: 'changeInStockOnly', value: inStockOnly});
 
-    this.handleFilterTextChange = this.handleFilterTextChange.bind(this);
-    this.handleInStockOnlyChange = this.handleInStockOnlyChange.bind(this);
-  }
-  handleFilterTextChange(text) {
-    // HTTP GETして...
-    this.setState({
-      filterText: text
-    });
-  }
-  handleInStockOnlyChange(inStockOnly) {
-    // HTTP GETして...
-    this.setState({
-      inStockOnly
-    });
-  }
-  render() {
-    const filteredProducts = PRODUCTS.filter((p) => {
-      return (!this.state.inStockOnly || p.stocked) && (p.name.match(RegExp(`.*${this.state.filterText}.*`)));
-    });
-    return (
-      <div className="filterable-product-table">
-        <h1>Product table - React Main Concepts / thinking in react</h1>
-        <SearchBar filterText={this.state.filterText} inStockOnly={this.state.inStockOnly}
-          onFilterTextChange={this.handleFilterTextChange}
-          onInStockOnlyChange={this.handleInStockOnlyChange} />
-        <ProductTable products={filteredProducts} />
-      </div>
-    );
-  }
+export function FilterableProductTable(props) {
+  const [state, dispatch] = useReducer(reducer, {
+    filterText: '',
+    inStockOnly: false,
+  });
+
+  const filteredProducts = PRODUCTS.filter((p) => {
+    return (!state.inStockOnly || p.stocked) && (p.name.match(RegExp(`.*${state.filterText}.*`)));
+  });
+
+  return (
+  <div className="filterable-product-table">
+    <h1>Product table - React Main Concepts / thinking in react</h1>
+    <SearchBar filterText={state.filterText} inStockOnly={state.inStockOnly}
+      onFilterTextChange={(text) => dispatch(changeFilterTextAction(text))}
+      onInStockOnlyChange={(inStockOnly) => dispatch(changeInStockOnly(inStockOnly))} />
+    <ProductTable products={filteredProducts} />
+  </div>
+  );
 }
